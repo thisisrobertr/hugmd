@@ -13,8 +13,9 @@ output = pipe(new)
 print(output[0])
 
 
-# query
-# takes in user input string and anxiety level, and uses it to generate text using text2text
+# TODO: interactions with data to properly provide accurate information.
+
+# TODO: testing prompts in depth
 def gen_query(user_inp, anx):
     output = pipe(f"""
     
@@ -39,3 +40,17 @@ def symptom_query(user_inp, anx):
     """)
     return output
 
+# TODO: method for general talking 
+def general(user_inp, anx):
+    output = pipe(f"""
+    You are a health anxiety chatbot that is serving a user.
+    Your current task is listening to your user's request and answering accordingly based on the information you have.
+    If you believe you have insufficient information, reply as such.
+
+    Request from user: {user_inp}
+
+    Context: The current user is anxious level {anx} on a scale of 1 to 10, so be mindful of their current stress level.
+
+    Try to rationalize their judgment of condition and if there are possibly leaps in logic due to stress, or if symptoms may not necessarily be representative of the condition.
+    """)
+    return output
