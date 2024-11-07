@@ -1,10 +1,13 @@
 import torch
 from transformers import pipeline
 
-generator = pipeline("text-generation", model="gpt2")
+pipe = pipeline("text2text-generation", model="google/t5-efficient-mini")
 
-print("Running pipeline...", end = " ")
-output = generator("Write a poem about cats.")
-print("done!\n\n")
+output = pipe("Be conversational and talk to me for a bit.")
 
-print(output[0]['generated_text'])
+print(output[0])
+
+new = input()
+
+output = pipe(new)
+print(output[0])
