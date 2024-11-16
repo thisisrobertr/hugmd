@@ -46,8 +46,15 @@ class Menu(FloatLayout):
         self.add_widget(self.menu_button)
 
     def switch_screen(self, screen_name):
-        self.screen_manager.current = screen_name
-        self.dropdown.dismiss()
+        if(screen_name == 'Main'):
+            self.screen_manager.transition = SlideTransition(direction='right')
+            self.screen_manager.current = screen_name
+            self.dropdown.dismiss()
+
+        else:
+            self.screen_manager.transition = SlideTransition(direction='left')
+            self.screen_manager.current = screen_name
+            self.dropdown.dismiss()
            
 class MainPage(BoxLayout):
     def __init__(self, screen_manager): 
@@ -79,10 +86,8 @@ class MainPage(BoxLayout):
         self.bg_rect.pos = instance.pos
 
     def go_to_chat(self, instance):
+        self.screen_manager.transition = SlideTransition(direction='left')
         self.screen_manager.current = 'Chat'
-
-    def go_to_tool(self, instance):
-        self.screen_manager.current = 'Settings'
         
 class ChatPage(BoxLayout):
     def __init__(self, screen_manager): 
@@ -113,6 +118,7 @@ class ChatPage(BoxLayout):
         self.bg_rect.pos = instance.pos
 
     def go_to_main(self, instance):
+        self.screen_manager.transition = SlideTransition(direction='right')
         self.screen_manager.current = 'Main'
 
     def send_message(self, instance):
@@ -139,6 +145,7 @@ class SettingsPage(BoxLayout):
         self.bg_rect.pos = instance.pos
 
     def go_to_main(self, instance):
+        self.screen_manager.transition = SlideTransition(direction='right')
         self.screen_manager.current = 'Main'
 
 
