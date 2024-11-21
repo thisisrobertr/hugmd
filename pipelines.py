@@ -11,6 +11,7 @@ def gen_query(user_inp, anx):
     You are a health anxiety chatbot that is serving a user. Give a reasonable assessment of the following query, and elaborate upon your reasoning without giving the prompt back: {user_inp}
     \nContext: The user is current anxious level {anx} on a scale of 1 to 10, so remain mindful of tone.
     The user wants to be addressed conversationally, so use the pronoun "you"
+    Remind the user of strategies to rationalize and reduce feelings of anxiety.
     Remind the user that you cannot diagnose as a chatbot if asked anything pertaining diagnosis.""", max_length = 500)
     return output[0]['generated_text']
 

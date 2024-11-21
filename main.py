@@ -164,7 +164,8 @@ class ChatPage(BoxLayout):
                 max_text_length=200,
                 helper_text="Character count:",
                 multiline=False,
-                size_hint=(0.85, 1)
+                size_hint=(0.85, 1),
+                halign='center'
             )
         self.input_area.bind(on_text_validate=self.send_message)
             # Send button
@@ -197,7 +198,7 @@ class ChatPage(BoxLayout):
                 text_size=(self.width, None),
                 color=CHAT_USER_COLOR,
                 valign='top',
-                halign='left'
+                halign='center'
             )
             self.chat_display.add_widget(message_label)
             self.input_area.text = ""
@@ -217,7 +218,7 @@ class ChatPage(BoxLayout):
                 text_size=(self.width, None),
                 color=CHAT_BOT_COLOR,
                 valign='top',
-                halign='left'
+                halign='center'
             )
             self.chat_display.add_widget(message_label)
 
