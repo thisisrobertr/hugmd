@@ -139,7 +139,7 @@ class ChatPage(BoxLayout):
                 multiline=False,
                 size_hint=(0.85, 1)
             )
-
+        self.input_area.bind(on_text_validate=self.send_message)
             # Send button
         self.send_button = MDIconButton(
                 icon="send-circle",
@@ -160,7 +160,7 @@ class ChatPage(BoxLayout):
         self.bg_rect.size = instance.size
         self.bg_rect.pos = instance.pos
 
-    def send_message(self, instance):
+    def send_message(self, instance=None):
         message = self.input_area.text.strip()
         if message:
             message_label = Label(
@@ -175,7 +175,7 @@ class ChatPage(BoxLayout):
             self.chat_display.add_widget(message_label)
             self.input_area.text = ""
 
-    def send_resonse(self, instance):
+    def send_resonse(self, instance=None):
         message = "placeholder for response object"
         if message:
             message_label = Label(
