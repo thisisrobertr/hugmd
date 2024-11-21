@@ -10,6 +10,31 @@ from kivymd.uix.textfield.textfield import MDTextField
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.uix.scrollview import ScrollView
 
+import logging
+import pipelines
+import threading, queue
+
+CHAT_BACKGROUND_COLOR = (0.5, 0.9, 0.8, 1)
+CHAT_USER_COLOR = (0.35, 0.35, 0.35, 1.0)
+CHAT_BOT_COLOR = (0, 0, 0, 1.0)
+
+class LLMExecutionThread(threading.Thread):
+
+    def __init__(self):
+        super().__init__()
+        self.input_queue = queue.Queue()
+        self.output_queue = queue.Queue()
+
+    def give_input(self, text):
+        self.input_queue.enqueue(text)
+
+    def run():
+        while True:
+            if not self.input_queue.empty():
+                self.output_queue.enqueue(pipelines.gen_query(text, 4))
+            else:
+                pass
+
 class VM(MDApp):
     def build(self):
         self.screen_manager = ScreenManager()
@@ -108,12 +133,14 @@ class MainPage(BoxLayout):
         self.screen_manager.current = 'Chat'
 
 class ChatPage(BoxLayout):
+    last_prompt = None
+
     def __init__(self, screen_manager): 
         super().__init__(orientation='vertical')
         self.screen_manager = screen_manager
         
         with self.canvas.before:
-            Color(0.5, 0.9, 0.8, 1)  # Set background color
+            Color(CHAT_BACKGROUND_COLOR[0], CHAT_BACKGROUND_COLOR[1], CHAT_BACKGROUND_COLOR[2], CHAT_BACKGROUND_COLOR[3])  # Set background color
             self.bg_rect = Rectangle(size=self.size, pos=self.pos)
         
         self.bind(size=self.update_bg, pos=self.update_bg)
@@ -168,22 +195,27 @@ class ChatPage(BoxLayout):
                 size_hint_y=None,
                 height=self.calculate_label_height(message),
                 text_size=(self.width, None),
-                color=(1,1,1,1),
+                color=CHAT_USER_COLOR,
                 valign='top',
                 halign='left'
             )
             self.chat_display.add_widget(message_label)
             self.input_area.text = ""
+            # get a response, or try to
+            self.last_prompt = message
 
-    def send_resonse(self, instance=None):
-        message = "placeholder for response object"
+            self.send_response()
+
+    def send_response(self, instance=None):
+        message = pipelines.gen_query(self.last_prompt, 4) # "placeholder for response object"
+        message = message
         if message:
             message_label = Label(
                 text=message,
                 size_hint_y=None,
                 height=self.calculate_label_height(message),
                 text_size=(self.width, None),
-                color=(0,0,0,0),
+                color=CHAT_BOT_COLOR,
                 valign='top',
                 halign='left'
             )

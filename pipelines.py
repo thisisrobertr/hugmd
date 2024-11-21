@@ -13,7 +13,7 @@ def gen_query(user_inp, anx):
     \nContext: The user is current anxious level {anx} on a scale of 1 to 10, so remain mindful of tone.
     
     Remind the user that you cannot diagnose as a chatbot if asked anything pertaining diagnosis.""", max_length = 500)
-    return output
+    return output[0]['generated_text']
 
 def symptom_query(user_inp, anx):
     condition = input("Tell me what you believe you are experiencing: ")
@@ -28,7 +28,7 @@ def symptom_query(user_inp, anx):
 
     Try to rationalize their judgment of condition and if there are possibly leaps in logic due to stress, or if symptoms may not necessarily be representative of the condition.
     """)
-    return output
+    return output[0]['generated_text']
 
 # TODO: method for general talking 
 def general(user_inp, anx):
@@ -43,4 +43,4 @@ def general(user_inp, anx):
 
     Try to rationalize their judgment of condition and if there are possibly leaps in logic due to stress, or if symptoms may not necessarily be representative of the condition.
     """)
-    return output
+    #return output[0]['generated_text']
