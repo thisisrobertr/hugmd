@@ -189,7 +189,7 @@ class ChatPage(BoxLayout):
         self.bg_rect.pos = instance.pos
 
     def send_message(self, instance=None):
-        message = self.input_area.text.strip()
+        message = "You: " + self.input_area.text.strip()
         if message:
             message_label = Label(
                 text=message,
@@ -209,10 +209,10 @@ class ChatPage(BoxLayout):
 
     def send_response(self, instance=None):
         message = pipelines.gen_query(self.last_prompt, 4) # "placeholder for response object
-        if not message: message = '(no response from model)'
+        if not message: message = 'Bot: (no response from model)'
         if message:
             message_label = Label(
-                text=message,
+                text= 'Bot: ' + message,
                 size_hint_y=None,
                 height=self.calculate_label_height(message),
                 text_size=(self.width, None),
