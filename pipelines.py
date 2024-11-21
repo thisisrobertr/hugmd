@@ -1,14 +1,13 @@
 import torch
 from transformers import pipeline
 
-pipe = pipeline("text2text-generation", model="google/t5-efficient-mini")
+pipe = pipeline("text2text-generation", model="google/flan-t5-large")
 
 # TODO: interactions with data to properly provide accurate information.
 
 # TODO: testing prompts in depth
 def gen_query(user_inp, anx):
     output = pipe(f"""
-    
     You are a health anxiety chatbot that is serving a user. Give a reasonable assessment of the following query: {user_inp}
     \nContext: The user is current anxious level {anx} on a scale of 1 to 10, so remain mindful of tone.
     

@@ -207,8 +207,8 @@ class ChatPage(BoxLayout):
             self.send_response()
 
     def send_response(self, instance=None):
-        message = pipelines.gen_query(self.last_prompt, 4) # "placeholder for response object"
-        message = message
+        message = pipelines.gen_query(self.last_prompt, 4) # "placeholder for response object
+        if not message: message = '(no response from model)'
         if message:
             message_label = Label(
                 text=message,
