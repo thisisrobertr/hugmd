@@ -108,15 +108,15 @@ class MainPage(BoxLayout):
             self.bg_rect = Rectangle(size=self.size, pos=self.pos)
         self.bind(size=self.update_bg, pos=self.update_bg)
         self.add_widget(Menu(screen_manager, (0.2, 0.6, 0.8, 1)), index=0)
-        button = Button(text="Prompt 1", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
+        button = Button(text="Is it likely I have...", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
         button.bind(on_press=self.go_to_chat)
         self.add_widget(button)
 
-        button = Button(text="Prompt 2", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
+        button = Button(text="My current symptoms are...", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
         button.bind(on_press=self.go_to_chat)
         self.add_widget(button)
 
-        button = Button(text="Prompt 3", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
+        button = Button(text="I think I might have...", size_hint=(0.5, 0.2), pos_hint={"center_x": 0.5})
         button.bind(on_press=self.go_to_chat)
         self.add_widget(button)
 

@@ -1,7 +1,7 @@
 import torch
 from transformers import pipeline
 
-pipe = pipeline("text2text-generation", model="google/flan-t5-large", device=0)
+pipe = pipeline("text2text-generation", model="google/flan-t5-large")
 
 # TODO: interactions with data to properly provide accurate information.
 
